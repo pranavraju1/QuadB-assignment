@@ -6,9 +6,12 @@ const About = () => {
   const [desc, setDesc] = useState("");
   const navigate = useNavigate();
   const getMovie = () => {
-    setMovie(() => JSON.parse(sessionStorage.getItem("movie")));
-    console.log(movie);
-    getSummary(JSON.parse(sessionStorage.getItem("movie")));
+    const storedMovie = sessionStorage.getItem("movie");
+    if (storedMovie) {
+      const parsedMovie = JSON.parse(storedMovie);
+      setMovie(parsedMovie);
+      getSummary(parsedMovie);
+    }
   };
 
   const getSummary = (mov) => {
@@ -108,7 +111,7 @@ const About = () => {
         
         </>
       ) : (
-        <h1>Please Chose the Movie</h1>
+        <h1>Please Chose A Movie</h1>
       )}
     </>
   );
